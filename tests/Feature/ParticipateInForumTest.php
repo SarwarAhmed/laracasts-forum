@@ -33,7 +33,7 @@ class ParticipateInForumTest extends TestCase
 
         $this->be($user = User::factory()->create());
 
-        $thread = Thread::factory()->create();
+        $thread = create('App\Models\Thread');
 
         $reply = Reply::factory()->make();
 
