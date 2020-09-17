@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -17,13 +16,9 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function unauthenticated_user_may_not_add_replies()
     {
-        $this->expectException(AuthenticationException::class);
-        $this->withoutExceptionHandling();
-
-        $thread = Thread::factory()->create();
-
-        $reply = Reply::factory()->create();
-        $this->post('/threads/1/replies', []);
+        $this->withExceptionHandling()
+            ->post('/threads/some-channel/1/replies', [])
+            ->assertRedirect('/login');
     }
 
     /** @test */
