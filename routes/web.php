@@ -27,6 +27,7 @@ Route::get('/threads', [ThreadsController::class, 'index']);
 Route::get('/threads/create', [ThreadsController::class, 'create']);
 Route::get('/threads/{channel}/{thread}', [ThreadsController::class, 'show']);
 Route::post('/threads', [ThreadsController::class, 'store']);
+Route::get('/threads/{channel}', [ThreadsController::class, 'index']);
 
 // Route::resource('threads', ThreadsController::class);
 
