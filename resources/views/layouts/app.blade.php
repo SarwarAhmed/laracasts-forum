@@ -45,6 +45,8 @@
                                         class="dropdown-item"
                                     >My Threads</a>
                                 @endauth
+
+                                <a class="dropdown-item" href="/threads?popular=1">Popular Threads</a>
                             </div>
                         </li>
 

@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="#">{{ $thread->creator->name }}</a> posted: {{ $thread->created_at->diffForHumans() }}
                     <h5>{{ $thread->title }}</h5>
                 </div>
 
