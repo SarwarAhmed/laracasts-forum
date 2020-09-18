@@ -12,6 +12,7 @@
                     @csrf
 
                     <button class="btn btn-secondary btn-sm"
+                        type="submit"
                         {{ $reply->isFavorited() ? 'disabled' : '' }}
                     >
                         {{ $reply->favorites_count }}
