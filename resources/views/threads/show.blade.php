@@ -6,7 +6,20 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ $thread->title }}</h5>
+                    <div class="input-group-append justify-content-between">
+                        <h5>{{ $thread->title }}</h5>
+
+                        @auth()
+                            <form action="{{ $thread->path() }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" 
+                                    class="btn btn-sm btn-danger"
+                                >Delete Thread</button>
+                            </form>
+                        @endauth
+                    </div>
                 </div>
 
                 <div class="card-body">
