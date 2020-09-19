@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory;
+    use HasFactory, RecordsActivity;
 
     protected $guarded = [];
 
