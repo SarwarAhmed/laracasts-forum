@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @foreach ($threads as $thread)
+            @forelse ($threads as $thread)
                 <div class="card mt-4">
                     <div class="card-header">
                         <div class="input-group-append justify-content-between">
@@ -27,7 +27,11 @@
                         </article>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="card">
+                    <p class="card-header">Threre are no relavant results at this time.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

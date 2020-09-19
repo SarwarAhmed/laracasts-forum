@@ -16,8 +16,9 @@
                     <div class="card-header">
                         <div class="input-group-append justify-content-between">
                             <span>
-                                <a href="#">{{ $thread->creator->name }}</a> posted: 
-                                {{ $thread->title }}
+                                <a href="{{ route('profile', $profileUser->name) }}"
+                                >{{ $thread->creator->name }}</a> posted: 
+                                <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
                             </span>
 
                             <span>

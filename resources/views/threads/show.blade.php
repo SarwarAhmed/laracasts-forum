@@ -7,9 +7,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="input-group-append justify-content-between">
-                        <h5>{{ $thread->title }}</h5>
+                        <h5>
+                            <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
+                        </h5>
 
-                        @auth()
+                        @can ('update', $thread)
                             <form action="{{ $thread->path() }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -18,7 +20,7 @@
                                     class="btn btn-sm btn-danger"
                                 >Delete Thread</button>
                             </form>
-                        @endauth
+                        @endcan
                     </div>
                 </div>
 
