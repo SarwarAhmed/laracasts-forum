@@ -10,8 +10,7 @@
                 </h1>
             </div>
 
-            @foreach ($activities as $date => $activity)
-
+            @forelse ($activities as $date => $activity)
                 <h3 class="mt-4">{{ $date }}</h3>
 
                 @foreach ($activity as $record)
@@ -19,7 +18,9 @@
                         @include ("profiles.activities.{$record->type}", ['activity' => $record])
                     @endif
                 @endforeach
-            @endforeach
+            @empty
+                <h4 class="card-header mt-4">There is no activity yet.</h4>
+            @endforelse
         </div>
     </div>
 </div>
