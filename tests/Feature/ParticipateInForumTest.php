@@ -22,20 +22,19 @@ class ParticipateInForumTest extends TestCase
     }
 
     /** @test */
-    public function an_autheticated_user_may_participate_in_forum_threads()
+    public function an_authenticated_user_may_participate_in_forum_threads()
     {
         $this->withoutExceptionHandling();
 
         $this->be($user = User::factory()->create());
 
         $thread = create('App\Models\Thread');
-
         $reply = Reply::factory()->make();
 
         $this->post($thread->path() . '/replies', $reply->toArray());
 
-        $this->get($thread->path())
-            ->assertSee($reply->body);
+        $this->assertDatabaseHas('replies', ['body' => $reply->body]);
+        $this->assertEquals(1, $thread->fresh()->replies_count);
     }
 
     /** @test */
@@ -54,7 +53,7 @@ class ParticipateInForumTest extends TestCase
     public function unauthorized_users_cannot_delete_replies()
     {
         $reply = create('App\Models\Reply');
-        
+
         $this->delete("/replies/{$reply->id}")
         ->assertRedirect('/login');
 
@@ -74,13 +73,14 @@ class ParticipateInForumTest extends TestCase
         $this->delete("/replies/{$reply->id}")->assertStatus(302);
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+        $this->assertEquals(0, $reply->thread->fresh()->replies_count);
     }
 
     /** @test */
     public function unauthorized_users_cannot_update_replies()
     {
         $reply = create('App\Models\Reply');
-        
+
         $this->patch("/replies/{$reply->id}")
         ->assertRedirect('/login');
 
