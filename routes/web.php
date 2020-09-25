@@ -41,6 +41,7 @@ Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
 Route::delete('/replies/{reply}', [RepliesController::class, 'destroy']);
 
 Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'store'])->middleware('auth');
+Route::delete('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'destroy'])->middleware('auth');
 
 Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store']);
 Route::delete('/replies/{reply}/favorites', [FavoritesController::class, 'destroy']);

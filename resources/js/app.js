@@ -36,12 +36,12 @@ Vue.component('thread-view', require('./pages/Thread.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
-
 window.events = new Vue();
 
 window.flash = function (message) {
     window.events.$emit('flash', message);
 };
+
+const app = new Vue({
+    el: '#app',
+});
