@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserNotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\ThreadsController;
@@ -47,3 +48,6 @@ Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])
 Route::delete('/replies/{reply}/favorites', [FavoritesController::class, 'destroy']);
 
 Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
+
+Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class, 'destroy']);
+Route::get('/profiles/{user}/notifications/', [UserNotificationsController::class, 'index']);
