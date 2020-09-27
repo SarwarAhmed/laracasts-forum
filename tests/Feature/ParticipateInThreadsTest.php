@@ -9,7 +9,7 @@ use App\Models\Thread;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ParticipateInForumTest extends TestCase
+class ParticipateInThreadsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -102,5 +102,22 @@ class ParticipateInForumTest extends TestCase
         $this->patch("replies/{$reply->id}", ['body' => $updatedReply]);
 
         $this->assertDatabasehas('replies', ['id' => $reply->id, 'body' => $updatedReply]);
+    }
+
+    /** @test */
+    public function replies_that_contain_spam_may_not_be_created()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->be($user = User::factory()->create());
+
+        $thread = create('App\Models\Thread');
+        $reply = Reply::factory()->make([
+            'body' => 'Yahoo Customer Support',
+        ]);
+
+        $this->expectException(\Exception::class);
+
+        $this->post($thread->path() . '/replies', $reply->toArray());
     }
 }

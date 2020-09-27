@@ -7,7 +7,7 @@ use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ReadThradsTest extends TestCase
+class ReadThreadsTest extends TestCase
 {
     use RefreshDatabase;
 
