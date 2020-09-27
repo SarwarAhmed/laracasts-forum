@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Inspections\Spam;
 use App\Models\Reply;
 use App\Models\Thread;
-use App\Spam;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
