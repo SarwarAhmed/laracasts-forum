@@ -35,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         // getBootstrap css for pagination
         Paginator::useBootstrap();
+
+        \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }
 }
