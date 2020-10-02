@@ -19,7 +19,7 @@ class CreateThreadsTest extends TestCase
 
         $this->get('/threads/create')
             ->assertRedirect('/login');
-        
+
             $this->post('/threads')
             ->assertRedirect('/login');
     }
@@ -48,7 +48,7 @@ class CreateThreadsTest extends TestCase
         $this->publishThread(['title' => null])
             ->assertSessionHasErrors('title');
     }
-    
+
     /** @test */
     public function a_thread_requires_a_body()
     {
@@ -57,7 +57,7 @@ class CreateThreadsTest extends TestCase
         $this->publishThread(['body' => null])
             ->assertSessionHasErrors('body');
     }
-    
+
     /** @test */
     public function a_thread_requires_a_valid_channel()
     {
@@ -67,7 +67,7 @@ class CreateThreadsTest extends TestCase
 
         $this->publishThread(['channel_id' => null])
             ->assertSessionHasErrors('channel_id');
-        
+
         $this->publishThread(['channel_id' => 99])
             ->assertSessionHasErrors('channel_id');
     }
