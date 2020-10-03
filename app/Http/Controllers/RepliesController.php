@@ -32,13 +32,9 @@ class RepliesController extends Controller
     {
         $this->authorize('update', $reply);
 
-        try {
-            request()->validate(['body' => 'required|spamfree']);
+        request()->validate(['body' => 'required|spamfree']);
 
-            $reply->update(request(['body']));
-        } catch (\Exception $e){
-            return response('Sorry, Your reply could not be saved at this time.', 422);
-        }
+        $reply->update(request(['body']));
     }
 
     public function destroy(Reply $reply)
