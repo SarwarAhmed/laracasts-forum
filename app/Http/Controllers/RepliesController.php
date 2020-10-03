@@ -6,7 +6,6 @@ use App\Http\Requests\CreatePostRequest;
 use App\Models\Reply;
 use App\Models\Thread;
 use App\Models\User;
-use App\Notifications\YouWereMentioned;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
@@ -23,22 +22,10 @@ class RepliesController extends Controller
 
     public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
-        $reply =  $thread->addReply([
+        return $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
-        ]);
-
-        preg_match_all('/\@([^\s\.]+)/', $reply->body, $matches);
-
-        foreach ($matches[1] as $name) {
-            $user = User::whereName($name)->first();
-
-            if ($user) {
-                $user->notify(new YouWereMentioned($reply));
-            }
-        }
-
-        return $reply->load('owner');
+        ])->load('owner');
     }
 
     public function update(Reply $reply)

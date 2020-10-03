@@ -10,11 +10,11 @@ class MentionUsersTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function mentioned_user_in_a_new_reply_are_notified()
+    public function mentioned_users_in_a_new_reply_are_notified()
     {
         $john = create('App\Models\User', ['name' => 'JohnDoe']);
 
-        $this->signIn();
+        $this->signIn($john);
 
         $jane = create('App\Models\User', ['name' => 'JaneDoe']);
 
