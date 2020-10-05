@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\UserNotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepliesController;
@@ -51,3 +52,5 @@ Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profi
 
 Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class, 'destroy']);
 Route::get('/profiles/{user}/notifications/', [UserNotificationsController::class, 'index']);
+
+Route::get('api/users', [UsersController::class, 'index']);
