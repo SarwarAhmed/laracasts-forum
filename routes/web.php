@@ -56,4 +56,4 @@ Route::get('/profiles/{user}/notifications/', [UserNotificationsController::clas
 
 Route::get('api/users', [UsersController::class, 'index']);
 
-Route::post('api/users/{user}/avatar', [UserAvatarController::class, 'store'])->middleware('auth');
+Route::post('api/users/{user}/avatar', [UserAvatarController::class, 'store'])->middleware('auth')->name('avatar');
