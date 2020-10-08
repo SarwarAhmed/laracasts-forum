@@ -14,7 +14,7 @@
                         <div class="input-group-append justify-content-between">
 
                             <h5>
-                                <img src="{{ $thread->creator->avatar() }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-2">
+                                <img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-2">
                                 <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
                             </h5>
 

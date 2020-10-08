@@ -4,22 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card-headerx">
-                <h1>
-                    {{ $profileUser->name }}
-                </h1>
-
-                @can ('update', $profileUser)
-                    <form method="POST" action="{{ route('avatar', $profileUser) }}" enctype="multipart/form-data">
-                        @csrf
-
-                        <input type="file" name="avatar">
-
-                        <button type="submit" class="btn btn-primary btn-sm">Save Avatar</button>
-                    </form>
-                @endcan
-
-                <img src="{{  $profileUser->avatar() }}" alt="{{ $profileUser->name }}" width="100" height="100">
+            <div class="">
+                <avatar-form :user="{{ $profileUser }}"></avatar-form>
             </div>
 
             @forelse ($activities as $date => $activity)
