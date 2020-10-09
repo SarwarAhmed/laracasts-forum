@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Events\ThreadReceivedNewReply;
 use App\Filters\ThreadFilters;
-use App\Visits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -96,10 +95,5 @@ class Thread extends Model
         $key = $user->visitedThreadCacheKey($this);
 
         return $this->updated_at > cache($key);
-    }
-
-    public function visits()
-    {
-        return new Visits($this);
     }
 }
