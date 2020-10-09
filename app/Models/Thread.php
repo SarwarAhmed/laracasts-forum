@@ -4,13 +4,13 @@ namespace App\Models;
 
 use App\Events\ThreadReceivedNewReply;
 use App\Filters\ThreadFilters;
+use App\Visits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Redis;
 
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity, RecordsVisits;
+    use HasFactory, RecordsActivity;
 
     protected $guarded = [];
 
@@ -96,5 +96,10 @@ class Thread extends Model
         $key = $user->visitedThreadCacheKey($this);
 
         return $this->updated_at > cache($key);
+    }
+
+    public function visits()
+    {
+        return new Visits($this);
     }
 }
