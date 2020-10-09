@@ -6,10 +6,11 @@ use App\Events\ThreadReceivedNewReply;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Redis;
 
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity;
+    use HasFactory, RecordsActivity, RecordsVisits;
 
     protected $guarded = [];
 

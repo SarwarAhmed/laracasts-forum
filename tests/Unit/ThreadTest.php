@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Notifications\ThreadWasUpdated;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Redis;
 use Tests\TestCase;
 use App\Models\Reply;
 use App\Models\Thread;
@@ -133,4 +134,21 @@ class ThreadTest extends TestCase
         });
     }
 
+    /** @test */
+    public function a_thread_records_each_visit()
+    {
+        $thread = make('App\Models\Thread', ['id' => 1]);
+
+        $thread->resetVisits();
+
+        $this->assertSame(0, $thread->visits());
+
+        $thread->recordVisit();
+
+        $this->assertEquals(1, $thread->visits());
+
+        $thread->recordVisit();
+
+        $this->assertEquals(2, $thread->visits());
+    }
 }
