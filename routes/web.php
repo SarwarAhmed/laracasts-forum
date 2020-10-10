@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RegisterConfirmationController;
 use App\Http\Controllers\Api\UserAvatarController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\UserNotificationsController;
@@ -53,6 +54,8 @@ Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profi
 
 Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class, 'destroy']);
 Route::get('/profiles/{user}/notifications/', [UserNotificationsController::class, 'index']);
+
+Route::get('/register/confirm', [RegisterConfirmationController::class, 'index']);
 
 Route::get('api/users', [UsersController::class, 'index']);
 
