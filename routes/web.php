@@ -30,7 +30,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/threads', [ThreadsController::class, 'index']);
+Route::get('/threads', [ThreadsController::class, 'index'])->name('threads');
 Route::get('/threads/create', [ThreadsController::class, 'create']);
 Route::get('/threads/{channel}/{thread}', [ThreadsController::class, 'show']);
 Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy']);
@@ -55,7 +55,7 @@ Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profi
 Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class, 'destroy']);
 Route::get('/profiles/{user}/notifications/', [UserNotificationsController::class, 'index']);
 
-Route::get('/register/confirm', [RegisterConfirmationController::class, 'index']);
+Route::get('/register/confirm', [RegisterConfirmationController::class, 'index'])->name('register.confirm');
 
 Route::get('api/users', [UsersController::class, 'index']);
 

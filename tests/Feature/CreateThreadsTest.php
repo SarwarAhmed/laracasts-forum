@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Tests\TestCase;
 use App\Models\Channel;
 use Illuminate\Auth\AuthenticationException;
@@ -18,22 +19,28 @@ class CreateThreadsTest extends TestCase
         $this->withExceptionHandling();
 
         $this->get('/threads/create')
-            ->assertRedirect('/login');
+            ->assertRedirect(route('login'));
 
-            $this->post('/threads')
-            ->assertRedirect('/login');
+            $this->post(route('threads'))
+            ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function authenticated_users_must_first_confirm_their_email_address_before_creating_threads()
+    public function new_users_must_first_confirm_their_email_address_before_creating_threads()
     {
-        $this->publishThread()
-            ->assertRedirect('/threads')
+        $user = User::factory()->unconfirmed()->create();
+
+        $this->withExceptionHandling()->signIn($user);
+
+        $thread = make('App\Models\Thread');
+
+        $this->post(route('threads'), $thread->toArray())
+            ->assertRedirect(route('threads'))
             ->assertSessionHas('flash', 'You must confirm your email address');
     }
 
     /** @test */
-    public function an_authenticated_user_can_create_new_forum_threads()
+    public function a_user_can_create_new_forum_threads()
     {
         $this->withoutExceptionHandling();
 
@@ -87,7 +94,7 @@ class CreateThreadsTest extends TestCase
 
         $thread = create('App\Models\Thread');
 
-        $this->delete($thread->path())->assertRedirect('/login');
+        $this->delete($thread->path())->assertRedirect(route('login'));
 
         $this->signIn();
         $this->delete($thread->path())->assertStatus(403);
