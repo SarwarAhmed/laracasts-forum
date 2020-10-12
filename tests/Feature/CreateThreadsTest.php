@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Thread;
 use App\Models\User;
 use Tests\TestCase;
 use App\Models\Channel;
@@ -85,6 +86,26 @@ class CreateThreadsTest extends TestCase
 
         $this->publishThread(['channel_id' => 99])
             ->assertSessionHasErrors('channel_id');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_unique_slug()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+
+        $thread = create('App\Models\Thread', ['title' => 'Foo Title', 'slug' => 'foo-title']);
+
+        $this->assertEquals($thread->fresh()->slug, 'foo-title');
+
+        $this->post(route('threads'), $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title-2')->exists());
+
+        $this->post(route('threads'), $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title-3')->exists());
     }
 
     /** @test */
