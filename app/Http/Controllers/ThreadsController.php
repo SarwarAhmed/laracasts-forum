@@ -9,6 +9,7 @@ use App\Trending;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
+use Illuminate\Support\Str;
 
 class ThreadsController extends Controller
 {
@@ -67,7 +68,8 @@ class ThreadsController extends Controller
             'user_id' => auth()->id(),
             'channel_id' => request('channel_id'),
             'title' => request('title'),
-            'body' => request('body')
+            'body' => request('body'),
+            'slug' => Str::slug(request('title')),
         ]);
 
         return redirect($thread->path())
