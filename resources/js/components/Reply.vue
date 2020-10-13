@@ -2,7 +2,7 @@
     <div>
         <br>
         <div :id="'reply-'+id" class="card">
-            <div class="card-header">
+            <div class="card-header " :class="isBest ? 'badge-success' : ''">
                 <div class="input-group-append justify-content-between">
                     <h5>
                         <a :href="'/profiles/'+data.owner.name"
@@ -31,9 +31,13 @@
                 <div v-else v-html="body"></div>
             </div>
 
-            <div class="card-footer input-group-append" v-if="canUpdate">
-                <button class="btn btn-sm btn-outline-secondary mr-3" @click="editing = true">Edit</button>
-                <button class="btn btn-danger btn-sm" @click="destroy">Delete</button>
+            <div class="card-footer input-group-append">
+                <div v-if="canUpdate">
+                    <button class="btn btn-sm btn-outline-secondary mr-3" @click="editing = true">Edit</button>
+                    <button class="btn btn-danger btn-sm" @click="destroy">Delete</button>
+                </div>
+                
+                <button class="btn btn-sm btn-outline-primary ml-auto" @click="markBestReply" v-show="! isBest">Best Reply?</button>
             </div>
         </div>
     </div>
@@ -53,6 +57,7 @@ export default {
             editing: false,
             id: this.data.id,
             body: this.data.body,
+            isBest: false,
         }
     },
 
@@ -91,6 +96,10 @@ export default {
             this.$emit('deleted', this.data.id)
 
             $(this.$el).fadeOut(500);
+        },
+
+        markBestReply() {
+            this.isBest = true
         }
     }
 }
