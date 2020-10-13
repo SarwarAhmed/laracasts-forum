@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\RegisterConfirmationController;
 use App\Http\Controllers\Api\UserAvatarController;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\BestRepliesController;
 use App\Http\Controllers\UserNotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepliesController;
@@ -37,7 +38,7 @@ Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy
 Route::post('/threads', [ThreadsController::class, 'store'])->middleware('must-be-confirmed');
 Route::get('/threads/{channel}', [ThreadsController::class, 'index']);
 
-// Route::resource('threads', ThreadsController::class);
+ Route::post('/replies/{reply}/best', [BestRepliesController::class, 'store'])->name('best-replies.store');
 
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class, 'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class, 'store']);
