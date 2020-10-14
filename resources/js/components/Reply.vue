@@ -32,11 +32,11 @@
             </div>
 
             <div class="card-footer input-group-append">
-                <div v-if="canUpdate">
+                <div v-if="authorize('updateReply', reply)">
                     <button class="btn btn-sm btn-outline-secondary mr-3" @click="editing = true">Edit</button>
                     <button class="btn btn-danger btn-sm" @click="destroy">Delete</button>
                 </div>
-                
+
                 <button class="btn btn-sm btn-outline-primary ml-auto" @click="markBestReply" v-show="! isBest">Best Reply?</button>
             </div>
         </div>
@@ -58,6 +58,7 @@ export default {
             id: this.data.id,
             body: this.data.body,
             isBest: false,
+            reply: this.data,
         }
     },
 
@@ -65,14 +66,6 @@ export default {
         ago() {
             return moment(this.data.created_at).fromNow() + '...'
         },
-
-        signedIn() {
-            return window.App.signedIn
-        },
-
-        canUpdate() {
-            return this.authorize(user => this.data.user_id == user.id)
-        }
     },
 
     methods: {
