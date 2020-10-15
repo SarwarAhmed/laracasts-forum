@@ -40,6 +40,7 @@ Route::post('/threads', [ThreadsController::class, 'store'])->middleware('must-b
 Route::get('/threads/{channel}', [ThreadsController::class, 'index']);
 
 Route::post('locked-threads/{thread}', [LockedThreadsController::class, 'store'])->name('locked-threads.store')->middleware('admin');
+Route::delete('locked-threads/{thread}', [LockedThreadsController::class, 'destroy'])->name('locked-threads.destroy')->middleware('admin');
 
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class, 'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class, 'store']);
