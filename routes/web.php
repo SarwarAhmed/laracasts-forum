@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\RegisterConfirmationController;
 use App\Http\Controllers\Api\UserAvatarController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\BestRepliesController;
+use App\Http\Controllers\LockedThreadsController;
 use App\Http\Controllers\UserNotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepliesController;
@@ -38,12 +39,14 @@ Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy
 Route::post('/threads', [ThreadsController::class, 'store'])->middleware('must-be-confirmed');
 Route::get('/threads/{channel}', [ThreadsController::class, 'index']);
 
- Route::post('/replies/{reply}/best', [BestRepliesController::class, 'store'])->name('best-replies.store');
+Route::post('locked-threads/{thread}', [LockedThreadsController::class, 'store'])->name('locked-threads.store')->middleware('admin');
 
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class, 'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class, 'store']);
 Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
 Route::delete('/replies/{reply}', [RepliesController::class, 'destroy'])->name('replies.destroy');
+
+Route::post('/replies/{reply}/best', [BestRepliesController::class, 'store'])->name('best-replies.store');
 
 Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'store'])->middleware('auth');
 Route::delete('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'destroy'])->middleware('auth');
