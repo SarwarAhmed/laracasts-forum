@@ -3769,7 +3769,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       repliesCount: this.thread.replies_count,
-      locked: this.thread.locked
+      locked: this.thread.locked,
+      editing: false
     };
   },
   methods: {
@@ -75727,8 +75728,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web Project\Laracasts\forum\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web Project\Laracasts\forum\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\WebProject\Laracasts\forum\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\WebProject\Laracasts\forum\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Thread;
 use App\Models\Channel;
 use App\Rules\Recaptcha;
 use App\Trending;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
-use Illuminate\Support\Facades\Http;
 
 class ThreadsController extends Controller
 {
@@ -58,7 +54,7 @@ class ThreadsController extends Controller
      * @param Recaptcha $recaptcha
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Recaptcha $recaptcha)
+    public function store(Recaptcha $recaptcha)
     {
         request()->validate([
             'title' => 'required|spamfree',
