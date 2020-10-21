@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\UserAvatarController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\BestRepliesController;
 use App\Http\Controllers\LockedThreadsController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserNotificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepliesController;
@@ -31,6 +32,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/threads/search', [SearchController::class, 'show']);
 
 Route::get('/threads', [ThreadsController::class, 'index'])->name('threads');
 Route::get('/threads/create', [ThreadsController::class, 'create']);
