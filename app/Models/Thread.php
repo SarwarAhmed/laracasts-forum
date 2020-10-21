@@ -7,10 +7,11 @@ use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity;
+    use HasFactory, RecordsActivity, Searchable;
 
     protected $guarded = [];
 
