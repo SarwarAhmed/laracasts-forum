@@ -31,6 +31,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::view('/scan', 'scan');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/threads/search', [SearchController::class, 'show']);
