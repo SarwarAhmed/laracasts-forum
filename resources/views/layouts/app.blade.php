@@ -20,6 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         [v-cloak] { display: none; }
+        .ais-highlight > em { background: yellow; font-style: normal; }
     </style>
     <script>
         window.App = {!! json_encode([
